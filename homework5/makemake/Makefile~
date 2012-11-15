@@ -1,0 +1,21 @@
+#Hw6 - Makefile
+all:
+	bison parser.ypp
+	flex -t scanner.ll > scanner.cpp	
+	g++ -Wall -g -o exprtest.cpp  driver.cpp scanner.cpp parser.tab.cpp
+exprtest: exprtest.o driver.o parser.tab.o scanner.o 
+	g++ -Wall -g -o exprtest.o driver.o parser.tab.o scanner.o
+driver.o: scanner.hpp driver.hpp driver.cpp
+	g++ -Wall -c driver.cpp
+exprtest.o: driver.hpp expression.hpp exprtest.cpp
+	g++ -Wall -c exprtest.cpp
+scanner.o: scanner.hpp scanner.cpp
+	flex -t scanner.ll > scanner.cpp
+	g++ -Wall -c scanner.cpp
+parser.tab.o: expression.hpp scanner.hpp driver.hpp parser.ypp
+	bison parser.ypp
+	g++ -Wall -c parser.tab.cpp
+
+
+clean: 
+	-rm -f *.o *.d *~ *.hh parser.cc parser.h scanner.cpp FlexLexer.h parser.tab.cpp parser.tab.hpp rm exprtest
