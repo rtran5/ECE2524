@@ -1,3 +1,4 @@
+#!/usr/bin/python2
 import FFClass
 import re
 import sys
@@ -5,7 +6,7 @@ import sys
 def mainMenu():
 
 #displays the main menu for the user to navigate.
-  indent()
+	indent()
 	print "Main Menu Options"
 	print ""
 	print "     1) Log in"
@@ -21,14 +22,14 @@ def mainMenu():
 	else: 
 		print "Invalid choice"
 		mainMenu()
-	
+
 def logIn():
 
 #receives information from the user so the user can access his league.  Ask's his league username and password, then access's that leagues data from Yahoo.
 	indent()
 	username = raw_input("Please enter a username: ")
 	password = raw_input("please enter a password: ")
-	
+
 	reader = FFClass.YahooFFLReader(username, password)
    	print "Logging into " + username
 	reader.login()
@@ -65,7 +66,7 @@ def teamMenu(username, reader,teamNames, teamID):
 	else:
 		print "Invalid argument"
 		teamMenu(username, reader,teamNames, teamID)
-			
+
 def displayStats(username,reader, data, strList):
 
 #displaying the stats and names of the teams.  Ask's the user for a choice input to view more in depth information on that team selected
@@ -155,13 +156,13 @@ def main():
 	mainMenu()
 
 def indent():
-	
+
 #print's blank lines to make the information easier to read and navigate.
 	print ""
 	print ""
 	print ""
   
-	
+
 
 if __name__ == "__main__":
     main()
